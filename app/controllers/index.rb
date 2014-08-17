@@ -5,8 +5,8 @@ end
 post '/user/new' do
   @user = User.new(fullname: params[:fullname], email: params[:email])
   @user.password = params[:password]
-  @user.save!
   if @user.valid?
+    @user.save!
     session[:id] = @user.id
     session[:email] = @user.email
     content_type :json
@@ -15,9 +15,18 @@ post '/user/new' do
     {html: sign_out_div, success: valid}.to_json
   else
     content_type :json
+    name_error = @user.errors.messages[:fullname]
+    email_error = @user.errors.messages[:email]
+    password_error = @user.errors.messages[:password_hash]
     valid = false
-    sign_in_div = erb :sign_in, layout => false
-    {html: sign_in_div, success: valid}.to_json
+    sign_in_div = erb :sign_in, :layout => false
+    {
+      html: sign_in_div,
+      success: valid,
+      name: name_error,
+      email: email_error,
+      password: password_error
+    }.to_json
   end
 end
 
