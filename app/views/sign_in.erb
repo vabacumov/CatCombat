@@ -1,0 +1,8 @@
+<form id="sign_in" action="/sessions" method="get">
+  <h3>Sign In</h3>
+  <label class="label">Email</label><br>
+  <input type="text" name="email" value="<%= session[:email] %>"><br>
+  <label class="label">Password</label><br>
+  <input type="password" name="password">
+  <input type="submit" value="Sign In">
+</form>
