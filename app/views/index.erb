@@ -1,11 +1,31 @@
 <h1>Cat Combat</h1>
-<form action="/user/new" method="post">
-  <h3>Sign Up</h3>
-  <label class="label">Full Name</label><br>
-  <input type="text" name="fullname" placeholder="Enter your full name"><br>
-  <label class="label">Email address</label><br>
-  <input type="text" name="email" placeholder="Enter your email"><br>
-  <label class="label">Password</label><br>
-  <input type="password" name="password">
-  <input type="submit" value="Create Account">
-</form>
+
+<div id="create_account">
+  <form id="sign_up" action="/user/new" method="post">
+    <h3>Sign Up</h3>
+    <label class="label">Full Name</label><br>
+    <input type="text" name="fullname" placeholder="Enter your full name"><br>
+    <label class="label">Email address</label><br>
+    <input type="text" name="email" placeholder="Enter your email"><br>
+    <label class="label">Password</label><br>
+    <input type="password" name="password">
+    <input type="submit" value="Create Account">
+  </form>
+</div>
+
+<div id="authentication">
+  <% if session[:id] %>
+    <h3>Sign Out</h3>
+    <input id="sign_out" type="submit" value="Sign Out">
+    </form>
+  <% else %>
+    <form id="sign_in" action="/sessions" method="get">
+      <h3>Sign In</h3>
+      <label class="label">Email</label><br>
+      <input type="text" name="email" value="<%= session[:email] %>"><br>
+      <label class="label">Password</label><br>
+      <input type="password" name="password">
+      <input type="submit" value="Sign In">
+  <% end %>
+</div>
+
