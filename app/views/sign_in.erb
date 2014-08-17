@@ -1,6 +1,9 @@
 <form id="sign_in" action="/sessions" method="get">
   <h3>Sign In</h3>
   <label class="label">Email</label><br>
+  <% if @error %>
+    <p class="errors">Invalid Email or Password. Please try again</p>
+  <% end %>
   <input type="text" name="email" value="<%= session[:email] %>"><br>
   <label class="label">Password</label><br>
   <input type="password" name="password">
