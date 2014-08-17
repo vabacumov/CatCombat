@@ -1,30 +1,24 @@
-> **Note**: This branch (master) contains a skeleton without any app code, perfect for creating a _new_ application or challenge. If you're looking for an example app built with this skeleton, take a look at the [example](/../..//tree/example) branch which includes basic CRUD and RSpec tests.
+CatCombat
 
-### Purpose
-The Sinatra Skeleton:
+Portfolio Project 10: A web application for cats and people
 
-1. Provides a foundation for building challenges or creating a new Sinatra application.
-2. Demonstrates a reasonable set of practices around building Sinatra applications.
-3. Eases the transition to Rails for Dev Bootcamp students
+User Stories:
+- User can create an account for his/her cat
+- User can sing in/out of his/her account
+- User can add a picture of his/her cat
+- Each cat has certain attributes that can be upgraded over time
+- Upon creating an account user has a number of points that can be used to increase his/her cat's attributes
+- User can challenge other users' cats to a combat
+- The outcome of a combat is determined by a partially random algorithm, which factors in each opponent's attributes
+- After each combat a winner is determined and a certain amount of experience is awarded
+- Upon gaining certain amount of experience, a cat gains new level and is awarded with more points to upgrade its attributes
+- User gets a notification via text message once his/her cat is challenged to a combat
+- User has the option to accept or reject combat
+- User can accept/reject combat by replying via text message
 
-### Quickstart
-
-1.  `bundle install`
-2.  `shotgun config.ru`
-
-As needed, create models & migrations with the `rake` tasks:
-
-```
-rake generate:migration  # Create an empty migration in db/migrate, e.g., rake generate:migration NAME=create_tasks
-rake generate:model      # Create an empty model in app/models, e.g., rake generate:model NAME=User
-```
-
-### Contributing
-
-We would love for you to help make the skeleton more awesome, There are three ways to contribute:
-
-1. Ask for a bug fix or enhancement!
-2. Submit a pull request for a bug fix or enhancement!
-3. Code review an open pull request!
-
-Be prepared to give and receive specific, actionable, and kind feedback!
+MVP Goal:
+- Create a database
+- Database must contain two tables: users and cats
+- Create user authentication
+- Create algorithm for determining the outcome of a combat
+- Create necessary views and corresponding routes
