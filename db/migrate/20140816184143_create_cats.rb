@@ -3,8 +3,9 @@ class CreateCats < ActiveRecord::Migration
     create_table :cats do |cat|
       cat.string :nickname
       cat.string :image_src
-      cat.integer :strength, :agility, :intelligence, :cuteness
+      cat.integer :strength, :agility, :intelligence, :cuteness, :hp
       cat.integer :xp
+      cat.integer :level
       cat.integer :rank
       cat.integer :user_id
 
