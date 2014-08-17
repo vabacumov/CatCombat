@@ -4,7 +4,7 @@ Portfolio Project 10: A web application for cats and people
 
 User Stories:
 - User can create an account for his/her cat
-- User can sing in/out of his/her account
+- User can sign in/out of his/her account
 - User can add a picture of his/her cat
 - Each cat has certain attributes that can be upgraded over time
 - Upon creating an account user has a number of points that can be used to increase his/her cat's attributes
