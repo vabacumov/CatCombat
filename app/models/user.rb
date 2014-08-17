@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  include BCrypt
+
   has_one :cat
 
   validates :fullname, :email, :password_hash, presence: true
