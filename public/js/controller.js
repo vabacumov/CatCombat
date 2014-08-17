@@ -54,10 +54,9 @@ $(document).ready(function() {
       if (response.success) {
         view.newUserDisplay(response);
         $('#sign_out').on('click', signOut);
-        $('#create_account').empty();
       }
       else {
-        view.newUserDisplay(response);
+        view.failedNewUserDisplay(response);
         $('#sign_in').on('submit', signIn);
       }
     }).fail(function() {
