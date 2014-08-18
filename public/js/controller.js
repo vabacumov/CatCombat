@@ -11,12 +11,9 @@ $(document).ready(function() {
       console.log('success');
       if (response.success) {
         view.signInDisplay(response);
-        // $('#authentication').html(response.html);
-        // $('#create_account').empty();
         $('#sign_out').on('click', signOut);
       } else {
         view.failedSignInDisplay(response);
-        // $('#authentication').html(response.html);
         $('#sign_in').on('submit', signIn);
       }
     }).fail(function() {
@@ -32,8 +29,6 @@ $(document).ready(function() {
     }).done(function(response) {
       console.log('success');
       view.signOutDisplay(response);
-      // $('#authentication').html(response.sign_in);
-      // $('#create_account').html(response.create_account);
       $('#sign_in').on('submit', signIn);
       $('#sign_up').on('submit', createAccount);
     }).fail(function() {
@@ -49,8 +44,6 @@ $(document).ready(function() {
       data: $(this).serialize()
     }).done(function(response) {
       console.log('success');
-      // $('#authentication').html(response.html);
-      // $('#create_account').empty();
       if (response.success) {
         view.newUserDisplay(response);
         $('#sign_out').on('click', signOut);
@@ -58,7 +51,6 @@ $(document).ready(function() {
       }
       else {
         view.failedNewUserDisplay(response);
-        $('#sign_in').on('submit', signIn);
       }
     }).fail(function() {
       console.log('failed');
@@ -93,7 +85,12 @@ $(document).ready(function() {
       data: $(this).serialize()
     }).done(function(response) {
       console.log('success');
-
+      if (response.success) {
+        view.userCatDisplay(response);
+      } else {
+        view.failedAttributesDisplay(response);
+        $('#cat_attributes').on('submit', chooseAttributes);
+      }
     }).fail(function() {
       console.log('failed');
     })
@@ -107,20 +104,23 @@ $(document).ready(function() {
       $('#sign_out').on('click', signOut) // Event listener for sign OUT button
     }
 
-    if ($('#create_account').children().length > 0) {
+    if ($('#create').children().length > 0) {
       $('#sign_up').on('submit', createAccount) // Event listener for create account button
     }
   }
   sessionStatus();
-
-  $('#create_account').hover(function() {
-    $(this).css('opacity', '1');
-  }, function() {
-    $(this).css('opacity', '0.6');
-  });
-    $('#authentication').hover(function() {
-    $(this).css('opacity', '1');
-  }, function() {
-    $(this).css('opacity', '0.6');
-  });
+  view.hoverEffect();
+  // Event listeners for hovering
+  // var hoverEffect = function() {
+  //   $('form').hover(function() {
+  //     $(this).css('opacity', '1');
+  //   }, function() {
+  //     $(this).css('opacity', '0.6');
+  //   });
+  // }
+  //   $('#authentication').hover(function() {
+  //   $(this).css('opacity', '1');
+  // }, function() {
+  //   $(this).css('opacity', '0.6');
+  // });
 });
