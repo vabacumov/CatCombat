@@ -54,13 +54,48 @@ $(document).ready(function() {
       if (response.success) {
         view.newUserDisplay(response);
         $('#sign_out').on('click', signOut);
+        $('#create_cat').on('submit', createNewCat);
       }
       else {
         view.failedNewUserDisplay(response);
         $('#sign_in').on('submit', signIn);
       }
     }).fail(function() {
-      console.log('failed')
+      console.log('failed');
+    })
+  }
+
+  var createNewCat = function(event) {
+    event.preventDefault();
+    $.ajax({
+      url: '/cats/new',
+      type: "POST",
+      data: $(this).serialize()
+    }).done(function(response) {
+      console.log('success');
+      if (response.success) {
+        view.chooseAttributesDisplay(response);
+        $('#cat_attributes').on('submit', chooseAttributes);
+      } else {
+        view.failedNewCatDisplay(response);
+        $('#create_cat').on('submit', createNewCat);
+      }
+    }).fail(function() {
+      console.log('failed');
+    })
+  }
+
+  var chooseAttributes = function(event) {
+    event.preventDefault();
+    $.ajax({
+      url: '/cats/new/attributes',
+      type: "POST",
+      data: $(this).serialize()
+    }).done(function(response) {
+      console.log('success');
+
+    }).fail(function() {
+      console.log('failed');
     })
   }
 
