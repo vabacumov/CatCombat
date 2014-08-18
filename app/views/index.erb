@@ -1,42 +1,45 @@
-<h1>Cat Combat</h1>
+<div id="container">
 
-<div id="create_account">
-  <% unless session[:id] %>
-  <form id="sign_up" action="/user/new" method="post">
-    <h3>Sign Up</h3>
-    <label class="label">Full Name</label><br>
-    <input type="text" name="fullname" placeholder="Enter your full name"><br>
-    <p class="errors" id="name_error"></p>
-    <label class="label">Email address</label><br>
-    <input type="text" name="email" placeholder="Enter your email"><br>
-    <p class="errors" id="email_error"></p>
-    <label class="label">Phone</label><br>
-    <input type="text" name="phone" placeholder="Enter your phone number"><br>
-    <p class="errors" id="phone_error"></p>
-    <label class="label">Password</label><br>
-    <input type="password" name="password">
-    <p class="errors" id="password_error"></p>
-    <input type="submit" value="Create Account">
-  </form>
-  <% end %>
+  <div id="create_account">
+    <% unless session[:id] %>
+    <form id="sign_up" action="/user/new" method="post">
+      <h3>Sign Up</h3>
+      <label class="label">Full Name</label><br>
+      <input type="text" name="fullname" placeholder="Enter your full name"><br>
+      <p class="errors" id="name_error"></p>
+      <label class="label">Email address</label><br>
+      <input type="text" name="email" placeholder="Enter your email"><br>
+      <p class="errors" id="email_error"></p>
+      <label class="label">Phone</label><br>
+      <input type="text" name="phone" placeholder="Enter your phone number"><br>
+      <p class="errors" id="phone_error"></p>
+      <label class="label">Password</label><br>
+      <input type="password" name="password">
+      <p class="errors" id="password_error"></p>
+      <input type="submit" value="Create Account">
+    </form>
+    <% end %>
+  </div>
+
+  <div id="authentication">
+    <% if session[:id] %>
+    <h3>Sign Out</h3>
+    <input id="sign_out" type="submit" value="Sign Out">
+    <% else %>
+    <form id="sign_in" action="/sessions" method="get">
+      <h3>Sign In</h3>
+      <label class="label">Email</label><br>
+      <input type="text" name="email" value="<%= session[:email] %>"><br>
+      <label class="label">Password</label><br>
+      <input type="password" name="password">
+      <input type="submit" value="Sign In">
+    </form>
+    <% end %>
+  </div>
+
+  <h1>Cat Combat</h1>
+
+  <div id="new_cat">
+  </div>
+
 </div>
-
-<div id="authentication">
-  <% if session[:id] %>
-  <h3>Sign Out</h3>
-  <input id="sign_out" type="submit" value="Sign Out">
-  <% else %>
-  <form id="sign_in" action="/sessions" method="get">
-    <h3>Sign In</h3>
-    <label class="label">Email</label><br>
-    <input type="text" name="email" value="<%= session[:email] %>"><br>
-    <label class="label">Password</label><br>
-    <input type="password" name="password">
-    <input type="submit" value="Sign In">
-  </form>
-  <% end %>
-</div>
-
-<div id="new_cat">
-</div>
-

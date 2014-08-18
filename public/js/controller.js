@@ -112,4 +112,15 @@ $(document).ready(function() {
     }
   }
   sessionStatus();
+
+  $('#create_account').hover(function() {
+    $(this).css('opacity', '1');
+  }, function() {
+    $(this).css('opacity', '0.6');
+  });
+    $('#authentication').hover(function() {
+    $(this).css('opacity', '1');
+  }, function() {
+    $(this).css('opacity', '0.6');
+  });
 });

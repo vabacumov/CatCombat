@@ -1,17 +1,44 @@
+#container {
+  position: absolute;
+  background-image: url("http://hdwallimg.com/wp-content/uploads/2014/07/Red-Cat-Vs-Black-Cat-Fight-Wallpaper-Photo.jpg");
+  width: 1900px;
+  height: 1200px;
+  top: 0px;
+}
+
+#create_account {
+  position: relative;
+  float: left;
+  display: inline-block;
+  background-color: #2B4000;
+  opacity: 0.6;
+}
+
+#authentication {
+  position: relative;
+  float: right;
+  display: inline-block;
+  background-color: #2B4000;
+  right: 5px;
+  top: 5px;
+  opacity: 0.6;
+}
+
 h1 {
+  color: #FFCC00;
+  font-family: Verdana;
+  font-size: 3em;
   margin-right: auto;
   margin-left: auto;
   width: 20%;
 }
 
-.label {
-  color: green;
+h3 {
+  color: white;
 }
 
-#authentication {
-  position: absolute;
-  right: 5px;
-  top: 5px;
+.label {
+  color: white;
 }
 
 .errors {
