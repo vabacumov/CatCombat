@@ -4,8 +4,9 @@
   <% if @error %>
     <p class="errors">Invalid Email or Password. Please try again</p>
   <% end %>
-  <input type="text" name="email" value="<%= session[:email] %>"><br>
+  <input type="email" name="email" value="<%= session[:email] %>"><br>
   <label class="label">Password</label><br>
-  <input type="password" name="password">
+  <input type="password" name="password"><br>
+
   <input type="submit" value="Sign In">
 </form>

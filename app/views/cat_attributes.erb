@@ -1,14 +1,15 @@
-<form id="cat_attributes" action="cat/new/attributes" method="post">
+<form id="cat_attributes" action="cats/new/attributes" method="post">
   <h3>Choose Your Attributes</h3>
   <p>You have 5 points to spend</p><br>
+  <p class="errors" id="attr_error"></p>
   <label class="label">Strength</label><br>
-  <input type="text" name="strength"><br>
+  <input type="number" name="strength"><br>
   <label class="label">Agility</label><br>
-  <input type="text" name="agility"><br>
+  <input type="number" name="agility"><br>
   <label class="label">Intelligence</label><br>
-  <input type="text" name="intelligence"><br>
+  <input type="number" name="intelligence"><br>
   <label class="label">Cuteness</label><br>
-  <input type="text" name="cuteness"><br>
+  <input type="number" name="cuteness"><br>
 
   <input type="submit" value="Upgrade">
 </form>
