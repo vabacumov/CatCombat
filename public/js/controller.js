@@ -37,7 +37,7 @@ $(document).ready(function() {
       $('#sign_in').on('submit', signIn);
       $('#sign_up').on('submit', createAccount);
     }).fail(function() {
-      console.log('failed')
+      console.log('failed');
     })
   }
 

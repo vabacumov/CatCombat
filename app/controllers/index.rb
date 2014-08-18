@@ -3,7 +3,7 @@ get '/' do
 end
 
 post '/user/new' do
-  @user = User.new(fullname: params[:fullname], email: params[:email])
+  @user = User.new(fullname: params[:fullname], email: params[:email], phone: params[:phone])
   @user.password = params[:password]
   if @user.valid?
     @user.save!
@@ -12,12 +12,14 @@ post '/user/new' do
     content_type :json
     valid = true
     sign_out_div = erb :sign_out, :layout => false
-    {html: sign_out_div, success: valid}.to_json
+    create_cat_div = erb :create_cat, :layout => false
+    {create_cat: create_cat_div, sign_out: sign_out_div, success: valid}.to_json
   else
     content_type :json
     name_error = @user.errors.messages[:fullname]
     email_error = @user.errors.messages[:email]
     password_error = @user.errors.messages[:password_hash]
+    phone_error = @user.errors.messages[:phone]
     valid = false
     sign_in_div = erb :sign_in, :layout => false
     {
@@ -25,7 +27,8 @@ post '/user/new' do
       success: valid,
       name: name_error,
       email: email_error,
-      password: password_error
+      password: password_error,
+      phone: phone_error
     }.to_json
   end
 end
