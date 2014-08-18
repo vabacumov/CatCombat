@@ -1,0 +1,20 @@
+<p id="nickname"><%= Cat.find(session[:cat_id]).nickname %></p>
+<img src="<%= Cat.find(session[:cat_id]).image_src %>">
+<div id="attritubes">
+  <label>Strength:</label>
+  <p id="strength"><%= Cat.find(session[:cat_id]).strength %></p>
+  <label>Agility:</label>
+  <p id="agility"><%= Cat.find(session[:cat_id]).agility %></p>
+  <label>Intelligence:</label>
+  <p id="intelligence"><%= Cat.find(session[:cat_id]).intelligence %></p>
+  <label>Cuteness:</label>
+  <p id="cuteness"><%= Cat.find(session[:cat_id]).cuteness %></p>
+</div>
+<div id="stats">
+  <label>Experience:</label>
+  <p id="xp"><%= Cat.find(session[:cat_id]).xp %></p>
+  <label>Level:</label>
+  <p id="level"><%= Cat.find(session[:cat_id]).level %></p>
+  <label>Rank:</label>
+  <p id="rank"><%= Cat.find(session[:cat_id]).rank || "-" %></p>
+</div>
