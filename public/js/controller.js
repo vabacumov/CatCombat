@@ -1,5 +1,13 @@
 $(document).ready(function() {
   var view = new View; //Creates new instance of View
+  var eventListeners = function() {
+  $('#sign_up').on('submit', createAccount);
+  $('#sign_in').on('submit', signIn);
+  $('#sign_out').on('click', signOut);
+  $('#create_cat').on('submit', createNewCat);
+  $('#cat_attributes').on('submit', chooseAttributes);
+  $('#choose').on('submit', chooseOpponent);
+  }
 
   var signIn = function(event) {
     event.preventDefault();
@@ -11,10 +19,10 @@ $(document).ready(function() {
       console.log('success');
       if (response.success) {
         view.signInDisplay(response);
-        $('#sign_out').on('click', signOut);
+        eventListeners();
       } else {
         view.failedSignInDisplay(response);
-        $('#sign_in').on('submit', signIn);
+        eventListeners();
       }
     }).fail(function() {
       console.log('failed');
@@ -29,8 +37,7 @@ $(document).ready(function() {
     }).done(function(response) {
       console.log('success');
       view.signOutDisplay(response);
-      $('#sign_in').on('submit', signIn);
-      $('#sign_up').on('submit', createAccount);
+      eventListeners();
     }).fail(function() {
       console.log('failed');
     })
@@ -46,8 +53,7 @@ $(document).ready(function() {
       console.log('success');
       if (response.success) {
         view.newUserDisplay(response);
-        $('#sign_out').on('click', signOut);
-        $('#create_cat').on('submit', createNewCat);
+        eventListeners();
       }
       else {
         view.failedNewUserDisplay(response);
@@ -67,10 +73,10 @@ $(document).ready(function() {
       console.log('success');
       if (response.success) {
         view.chooseAttributesDisplay(response);
-        $('#cat_attributes').on('submit', chooseAttributes);
+        eventListeners();
       } else {
         view.failedNewCatDisplay(response);
-        $('#create_cat').on('submit', createNewCat);
+        eventListeners();
       }
     }).fail(function() {
       console.log('failed');
@@ -81,7 +87,7 @@ $(document).ready(function() {
     event.preventDefault();
     $.ajax({
       url: '/cats/new/attributes',
-      type: "POST",
+      type: "PUT",
       data: $(this).serialize()
     }).done(function(response) {
       console.log('success');
@@ -89,38 +95,38 @@ $(document).ready(function() {
         view.userCatDisplay(response);
       } else {
         view.failedAttributesDisplay(response);
-        $('#cat_attributes').on('submit', chooseAttributes);
+        eventListeners();
       }
     }).fail(function() {
       console.log('failed');
     })
   }
 
-  var sessionStatus = function() {
-  // Checks whether any user is signed in and assigns corresponding event listener
-    if ($('#sign_in').length > 0) {
-      $('#sign_in').on('submit', signIn); // Event listener for sign IN button
-    } else {
-      $('#sign_out').on('click', signOut) // Event listener for sign OUT button
-    }
-
-    if ($('#create').children().length > 0) {
-      $('#sign_up').on('submit', createAccount) // Event listener for create account button
-    }
+  var chooseOpponent = function(event) {
+    event.preventDefault();
+    $.ajax({
+      url: '/cats/opponent',
+      type: "GET"
+    }).done(function(response) {
+      console.log('success');
+      view.opponentDisplay(response);
+    }).fail(function() {
+      console.log('failed');
+    })
   }
-  sessionStatus();
+
+  var hoverEffect = function() {
+    $('form').hover(function() {
+      $(this).css('opacity', '1');
+    }, function() {
+      $(this).css('opacity', '0.6');
+    });
+    $('#authentication').hover(function() {
+    $(this).css('opacity', '1');
+    }, function() {
+    $(this).css('opacity', '0.6');
+    });
+  }
+  eventListeners();
   view.hoverEffect();
-  // Event listeners for hovering
-  // var hoverEffect = function() {
-  //   $('form').hover(function() {
-  //     $(this).css('opacity', '1');
-  //   }, function() {
-  //     $(this).css('opacity', '0.6');
-  //   });
-  // }
-  //   $('#authentication').hover(function() {
-  //   $(this).css('opacity', '1');
-  // }, function() {
-  //   $(this).css('opacity', '0.6');
-  // });
 });
