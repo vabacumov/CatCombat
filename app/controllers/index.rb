@@ -123,3 +123,44 @@ put '/cats/new/attributes' do
     {user_cat: choose_attributes, error: error}.to_json
   end
 end
+
+get '/cats/opponent' do
+  cat = random_cat
+  session[:enemy_id] = cat.id
+  content_type :json
+  opponent_name = cat.nickname
+  opponent_img = cat.image_src
+  opponent_level = cat.level
+  opponent_rank = cat.rank
+  opponent_view = erb :random_cat, layout: false
+  {
+    html: opponent_view,
+    enemy_name: opponent_name,
+    enemy_img: opponent_img,
+    enemy_level: opponent_level,
+    enemy_rank: opponent_rank
+  }.to_json
+end
+
+get '/fight' do
+  combat = Combat.new(Cat.find(session[:cat_id]), Cat.find(session[:enemy_id]))
+  winner = combat.fight
+  # user = Cat.find(session[:cat_id])
+  # enemy = Cat.find(session[:enemy_id])
+  content_type :json
+  {winner: winner}.to_json
+  # {
+  #   user_name: user.nickname,
+  #   enemy_name: enemy.nickname,
+  #   user_hp: user.hp,
+  #   enemy_hp: enemy.hp,
+  #   user_strength: user.strength,
+  #   enemy_strength: enemy.strength,
+  #   user_agility: user.agility,
+  #   enemy_agility: enemy.agility,
+  #   user_intelligence: user.intelligence,
+  #   enemy_intelligence: enemy.intelligence,
+  #   user_cuteness: user.cuteness,
+  #   enemy_cuteness: enemy.cuteness
+  #   }.to_json
+end
