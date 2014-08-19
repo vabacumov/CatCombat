@@ -4,10 +4,27 @@ form {
   display: inline-block;
   opacity: 0.6;
 }
+#fight_button{
+  position: absolute;
+  right: 0px;
+  top: 400px;
+}
+#image {
+  width: 200px;
+  height: auto;
+}
+#opponent {
+  position: absolute;
+  right: 0px;
+  top: 430px;
+  text-align: center;
+  background-color: white;
+}
 #user_cat {
   position: relative;
   float: left;
   background-color: white;
+  text-align: center;
 }
 #container {
   position: absolute;
