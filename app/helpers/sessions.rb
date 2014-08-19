@@ -23,15 +23,15 @@ helpers do
       @enemy_hp = enemy.hp
     end
 
-    def self.values(attacker, victim)
+    def numbers(attacker, victim)
       damage = rand(1..attacker.strength) + rand(1..(attacker.level+1))
-      doddge = rand(1..5) + victim.agility + victim.intelligence
+      dodge = rand(1..5) + victim.agility + victim.intelligence
       crit = rand(1..5) + attacker.cuteness
       values = [damage, dodge, crit]
       return values
     end
 
-    def self.move(values, victim_hp)
+    def move(values, victim_hp)
       if values[1] < 12 && values[2] > 8
         victim_hp -= values[0] * 2
       elsif values[1] < 12
@@ -40,22 +40,22 @@ helpers do
       return victim_hp
     end
 
-    def self.player_hit
-      values = Combat.values(@user, @enemy)
-      Combat.move(values, @enemy_hp)
+    def player_hit
+      values = numbers(@user, @enemy)
+      move(values, @enemy_hp)
     end
 
-    def self.enemy_hit
-      values = Combat.values(@enemy, @user)
-      Combat.move(values, @user_hp)
+    def enemy_hit
+      values = numbers(@enemy, @user)
+      move(values, @user_hp)
     end
 
-    def self.fight
+    def fight
       until @user_hp <= 0 || @enemy_hp <= 0
-        Combat.player_hit
-        return @user if @enemy_hp <= 0
-        Combat.enemy_hit
-        return @enemy if @user_hp <= 0
+        player_hit
+        return @user.nickname if @enemy_hp <= 0
+        enemy_hit
+        return @enemy.nickname if @user_hp <= 0
       end
     end
   end
