@@ -65,6 +65,7 @@ end
 get '/sessions/delete' do
   session.delete(:id)
   session.delete(:cat_id)
+  session.delete(:enemy_id)
   @error = false
   content_type :json
   sign_in_div = erb :sign_in, :layout => false
@@ -90,7 +91,7 @@ post '/cats/new' do
   end
 end
 
-post '/cats/new/attributes' do
+put '/cats/new/attributes' do
   @cat = Cat.find(session[:cat_id])
   if (params[:strength].to_i + params[:agility].to_i + params[:intelligence].to_i + params[:cuteness].to_i) == 5
     @cat.update(strength: @cat.strength+params[:strength].to_i, agility: @cat.agility+params[:agility].to_i, intelligence: @cat.intelligence+params[:intelligence].to_i, cuteness: @cat.cuteness+params[:cuteness].to_i)

@@ -1,5 +1,5 @@
 <div id="container">
-
+  <!-- NAV -->
   <div id="create">
     <% unless session[:id] %>
     <form id="sign_up" action="/user/new" method="post">
@@ -24,28 +24,40 @@
 
   <div id="authentication">
     <% if session[:id] %>
-<!--     <h3>Sign Out</h3>
--->    <input id="sign_out" type="submit" value="Sign Out">
-<% else %>
-<form id="sign_in" action="/sessions" method="get">
-  <h3>Sign In</h3>
-  <label class="label">Email</label><br>
-  <input type="email" name="email" value="<%= session[:email] %>"><br>
-  <label class="label">Password</label><br>
-  <input type="password" name="password">
-  <br>
-  <br>
-  <input type="submit" value="Sign In">
-</form>
-<% end %>
-</div>
+      <input id="sign_out" type="submit" value="Sign Out">
+    <% else %>
+    <form id="sign_in" action="/sessions" method="get">
+      <h3>Sign In</h3>
+      <label class="label">Email</label><br>
+      <input type="email" name="email" value="<%= session[:email] %>"><br>
+      <label class="label">Password</label><br>
+      <input type="password" name="password">
+      <br>
+      <br>
+      <input type="submit" value="Sign In">
+    </form>
+    <% end %>
+  </div>
+<!--  -->
 
-<h1>Cat Combat</h1>
+  <h1>Cat Combat</h1>
 
-<div id="user_cat">
-  <% if session[:cat_id] %>
-    <%= erb :user_cat %>
-  <% end %>
-</div>
+  <div id="user_cat">
+    <% if session[:cat_id] %>
+      <%= erb :user_cat %>
+    <% end %>
+  </div>
+
+  <div id="fight_button">
+    <% if session[:cat_id] %>
+      <input id="choose" type="submit" value="Pick Opponent">
+    <% end %>
+  </div>
+
+  <div id="opponent">
+
+  </div>
+
+  <p id="winner"></p>
 
 </div>
