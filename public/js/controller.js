@@ -6,7 +6,18 @@ $(document).ready(function() {
   $('#sign_out').on('click', signOut);
   $('#create_cat').on('submit', createNewCat);
   $('#cat_attributes').on('submit', chooseAttributes);
-  $('#choose').on('submit', chooseOpponent);
+  $('#choose').on('click', chooseOpponent);
+  $('#fight').on('submit', fightOpponent);
+  }
+
+  var removeEventListeners = function() {
+  $('#sign_up').off();
+  $('#sign_in').off();
+  $('#sign_out').off();
+  $('#create_cat').off();
+  $('#cat_attributes').off();
+  $('#choose').off();
+  $('#fight').off();
   }
 
   var signIn = function(event) {
@@ -19,9 +30,11 @@ $(document).ready(function() {
       console.log('success');
       if (response.success) {
         view.signInDisplay(response);
+        removeEventListeners();
         eventListeners();
       } else {
         view.failedSignInDisplay(response);
+        removeEventListeners();
         eventListeners();
       }
     }).fail(function() {
@@ -37,6 +50,7 @@ $(document).ready(function() {
     }).done(function(response) {
       console.log('success');
       view.signOutDisplay(response);
+      removeEventListeners();
       eventListeners();
     }).fail(function() {
       console.log('failed');
@@ -53,6 +67,7 @@ $(document).ready(function() {
       console.log('success');
       if (response.success) {
         view.newUserDisplay(response);
+        removeEventListeners();
         eventListeners();
       }
       else {
@@ -73,9 +88,11 @@ $(document).ready(function() {
       console.log('success');
       if (response.success) {
         view.chooseAttributesDisplay(response);
+        removeEventListeners();
         eventListeners();
       } else {
         view.failedNewCatDisplay(response);
+        removeEventListeners();
         eventListeners();
       }
     }).fail(function() {
@@ -95,6 +112,7 @@ $(document).ready(function() {
         view.userCatDisplay(response);
       } else {
         view.failedAttributesDisplay(response);
+        removeEventListeners();
         eventListeners();
       }
     }).fail(function() {
@@ -110,6 +128,23 @@ $(document).ready(function() {
     }).done(function(response) {
       console.log('success');
       view.opponentDisplay(response);
+      removeEventListeners();
+      eventListeners();
+    }).fail(function() {
+      console.log('failed');
+    })
+  }
+
+  var fightOpponent = function(event) {
+    event.preventDefault();
+    $.ajax({
+      url: '/fight',
+      type: "GET"
+    }).done(function(response) {
+      console.log('success');
+      view.winnerDisplay(response);
+      removeEventListeners();
+      eventListeners();
     }).fail(function() {
       console.log('failed');
     })
