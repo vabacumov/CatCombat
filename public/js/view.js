@@ -1,4 +1,13 @@
 var View = function() {
+  this.displayFightButton = function() {
+    $button = document.createElement('input');
+    $($button).attr({
+      id: "choose",
+      type: 'submit',
+      value: 'Pick Opponent'
+    });
+    $('#fight_button').html($button);
+  },
   this.newUserDisplay = function(data) {
     $('#authentication').html(data.sign_out);
     $('#create').html(data.create_cat);
@@ -17,6 +26,7 @@ var View = function() {
     $('#authentication').html(data.sign_out);
     $('#user_cat').html(data.user_cat);
     $('#create').empty();
+    this.displayFightButton();
     this.hoverEffect();
   },
   this.failedSignInDisplay = function(data) {
@@ -50,12 +60,26 @@ var View = function() {
     $('#level').html(data.level);
     $('#rank').html(data.rank);
 
+    this.displayFightButton();
     this.hoverEffect();
   },
   this.failedAttributesDisplay = function(data) {
     $('#create').html(data.user_cat);
     $('#attr_error').html(data.error);
     this.hoverEffect();
+  },
+  this.opponentDisplay = function(data) {
+    $('#opponent').html(data.html);
+    $('#opponent_name').html(data.enemy_name);
+    $('#opponent_level').html(data.enemy_level);
+    if (data.enemy_rank) {
+      $('#opponent_rank').html(data.enemy_rank);
+    }
+    $('#image').attr('src', data.enemy_img);
+  },
+  this.winnerDisplay = function(data) {
+    $('#winner').html(data.fight_winner);
+    $('#opponent').empty();
   },
   this.hoverEffect = function() {
     $('form').hover(function() {
