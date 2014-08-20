@@ -7,7 +7,7 @@ $(document).ready(function() {
   $('#create_cat').on('submit', createNewCat);
   $('#cat_attributes').on('submit', chooseAttributes);
   $('#choose').on('click', chooseOpponent);
-  $('#fight').on('submit', fightOpponent);
+  $('#fight').on('click', fightOpponent);
   }
 
   var removeEventListeners = function() {
@@ -110,6 +110,9 @@ $(document).ready(function() {
       console.log('success');
       if (response.success) {
         view.userCatDisplay(response);
+        view.displayChooseOpponentButton;
+        removeEventListeners();
+        eventListeners();
       } else {
         view.failedAttributesDisplay(response);
         removeEventListeners();
@@ -139,7 +142,7 @@ $(document).ready(function() {
     event.preventDefault();
     $.ajax({
       url: '/fight',
-      type: "GET"
+      type: "PUT"
     }).done(function(response) {
       console.log('success');
       view.winnerDisplay(response);

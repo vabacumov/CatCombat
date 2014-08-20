@@ -1,12 +1,12 @@
 var View = function() {
-  this.displayFightButton = function() {
+  this.displayChooseOpponentButton = function() {
     $button = document.createElement('input');
     $($button).attr({
       id: "choose",
       type: 'submit',
       value: 'Pick Opponent'
     });
-    $('#fight_button').html($button);
+    $('#choose_enemy').html($button);
   },
   this.newUserDisplay = function(data) {
     $('#authentication').html(data.sign_out);
@@ -26,7 +26,7 @@ var View = function() {
     $('#authentication').html(data.sign_out);
     $('#user_cat').html(data.user_cat);
     $('#create').empty();
-    this.displayFightButton();
+    this.displayChooseOpponentButton();
     this.hoverEffect();
   },
   this.failedSignInDisplay = function(data) {
@@ -37,7 +37,9 @@ var View = function() {
     $('#authentication').html(data.login);
     $('#create').html(data.account);
     $('#user_cat').empty();
-    // $('#new_cat').empty();
+    $('#opponent').empty();
+    $('#choose_enemy').empty();
+    $('#winner').empty();
     this.hoverEffect();
   },
   this.chooseAttributesDisplay = function(data) {
@@ -60,7 +62,7 @@ var View = function() {
     $('#level').html(data.level);
     $('#rank').html(data.rank);
 
-    this.displayFightButton();
+    this.displayChooseOpponentButton();
     this.hoverEffect();
   },
   this.failedAttributesDisplay = function(data) {
@@ -78,7 +80,7 @@ var View = function() {
     $('#image').attr('src', data.enemy_img);
   },
   this.winnerDisplay = function(data) {
-    $('#winner').html(data.fight_winner);
+    $('#winner').html(data.winner);
     $('#opponent').empty();
   },
   this.hoverEffect = function() {
