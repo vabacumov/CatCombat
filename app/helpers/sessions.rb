@@ -1,4 +1,33 @@
+require 'twilio-ruby'
+
 helpers do
+
+  def send_challenge_message(number)
+    account_sid = 'AC1bb3ed460ac8576f28faf0bff3126847'
+    auth_token = '6b314a4a87bc5740a9972d38676eb08f'
+
+    @client = Twilio::REST::Client.new account_sid, auth_token
+
+    @client.account.messages.create({
+      :from => '+14843024003',
+      :to => number,
+      :body => 'Your cat has been challenged!'
+      })
+  end
+
+  def send_result_message(number, result)
+    account_sid = 'AC1bb3ed460ac8576f28faf0bff3126847'
+    auth_token = '6b314a4a87bc5740a9972d38676eb08f'
+
+    @client = Twilio::REST::Client.new account_sid, auth_token
+
+    @client.account.messages.create({
+      :from => '+14843024003',
+      :to => number,
+      :body => result
+      })
+  end
+
 
   def current_user
     if session[:id]
