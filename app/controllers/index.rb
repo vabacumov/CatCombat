@@ -142,25 +142,23 @@ get '/cats/opponent' do
   }.to_json
 end
 
-get '/fight' do
-  combat = Combat.new(Cat.find(session[:cat_id]), Cat.find(session[:enemy_id]))
+put '/fight' do
+  user_cat = Cat.find(session[:cat_id])
+  enemy_cat = Cat.find(session[:enemy_id])
+  combat = Combat.new(user_cat, enemy_cat)
   winner = combat.fight
-  # user = Cat.find(session[:cat_id])
-  # enemy = Cat.find(session[:enemy_id])
+  send_challenge_message(user_cat.user.phone)
+
+  case winner
+  when user_cat.nickname
+    send_result_message(user_cat.user.phone, "Your cat won!")
+  when enemy_cat.nickname
+    send_result_message(user_cat.user.phone, "Your cat lost...")
+  when "draw"
+    send_result_message(user_cat.user.phone, "Your cat drew even.")
+  end
+
   content_type :json
   {winner: winner}.to_json
-  # {
-  #   user_name: user.nickname,
-  #   enemy_name: enemy.nickname,
-  #   user_hp: user.hp,
-  #   enemy_hp: enemy.hp,
-  #   user_strength: user.strength,
-  #   enemy_strength: enemy.strength,
-  #   user_agility: user.agility,
-  #   enemy_agility: enemy.agility,
-  #   user_intelligence: user.intelligence,
-  #   enemy_intelligence: enemy.intelligence,
-  #   user_cuteness: user.cuteness,
-  #   enemy_cuteness: enemy.cuteness
-  #   }.to_json
 end
+
