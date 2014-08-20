@@ -16,6 +16,7 @@ helpers do
   end
 
   class Combat
+    attr_accessor :user, :enemy, :user_hp, :enemy_hp
     def initialize(user, enemy)
       @user = user
       @enemy = enemy
@@ -31,32 +32,42 @@ helpers do
       return values
     end
 
-    def move(values, victim_hp)
+    def player_move(values)
       if values[1] < 12 && values[2] > 8
-        victim_hp -= values[0] * 2
+        @enemy_hp -= values[0] * 2
       elsif values[1] < 12
-        victim_hp -= values[0]
+        @enemy_hp -= values[0]
       end
-      return victim_hp
+      return @enemy_hp
+    end
+
+    def enemy_move(values)
+      if values[1] < 12 && values[2] > 8
+        @user_hp -= values[0] * 2
+      elsif values[1] < 12
+        @user_hp -= values[0]
+      end
+      return @user_hp
     end
 
     def player_hit
       values = numbers(@user, @enemy)
-      move(values, @enemy_hp)
+      player_move(values)
     end
 
     def enemy_hit
       values = numbers(@enemy, @user)
-      move(values, @user_hp)
+      enemy_move(values)
     end
 
     def fight
-      until @user_hp <= 0 || @enemy_hp <= 0
+      until @user_hp <= 0 || enemy_hp <= 0
         player_hit
-        return @user.nickname if @enemy_hp <= 0
         enemy_hit
-        return @enemy.nickname if @user_hp <= 0
       end
+      return "draw" if @user_hp <= 0 && @enemy_hp <= 0
+      return user.nickname if @enemy_hp <= 0
+      return enemy.nickname if @user_hp <= 0
     end
   end
 
