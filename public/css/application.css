@@ -4,6 +4,9 @@ form {
   display: inline-block;
   opacity: 0.6;
 }
+#winner {
+  color: white;
+}
 #fight_button{
   position: absolute;
   right: 0px;
@@ -21,10 +24,15 @@ form {
   background-color: white;
 }
 #user_cat {
+  display: inline-block;
   position: relative;
+  width: 25%;
   float: left;
   background-color: white;
   text-align: center;
+}
+#user_cat img {
+  width: 50%;
 }
 #container {
   position: absolute;
