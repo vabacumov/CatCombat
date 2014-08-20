@@ -11,8 +11,9 @@ helpers do
     @client.account.messages.create({
       :from => '+14843024003',
       :to => number,
-      :body => 'Your cat has been challenged!'
+      :body => 'Your challenged another cat to a fight!'
       })
+    rescue
   end
 
   def send_result_message(number, result)
@@ -26,8 +27,12 @@ helpers do
       :to => number,
       :body => result
       })
+    rescue
   end
 
+  # def random_cat_img
+  #   response = HTTParty.get('http://thecatapi.com/api/images/get')
+  # end
 
   def current_user
     if session[:id]
