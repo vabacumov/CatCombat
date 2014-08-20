@@ -30,9 +30,9 @@ helpers do
     rescue
   end
 
-  # def random_cat_img
-  #   response = HTTParty.get('http://thecatapi.com/api/images/get')
-  # end
+  def random_cat_img
+    response = HTTParty.get('http://thecatapi.com/api/images/get')
+  end
 
   def current_user
     if session[:id]
@@ -106,3 +106,5 @@ helpers do
   end
 
 end
+
+
