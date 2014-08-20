@@ -1,4 +1,4 @@
-<form id="create_cat" action="/cats/new" method="post">
+<form class="form" id="create_cat" action="/cats/new" method="post">
   <h3>Create Your Cat</h3>
   <label class="label">Nickname</label><br>
   <input type="text" name="nickname"><br>
@@ -8,5 +8,5 @@
   <label class="label"></label><br>
   <input type="hidden" name="user_id" value="<%= session[:id] %>">
 
-  <input type="submit" value="Create Cat">
+  <input class="button" type="submit" value="Create Cat">
 </form>
