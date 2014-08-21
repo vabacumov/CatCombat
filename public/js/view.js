@@ -150,9 +150,15 @@ var View = function() {
       })
     })
   },
-  // this.zoomWinner = function(winner) {
-  //   $(winner).css('color', 'red');
-  // },
+  this.animateUserCat = function(fontSize) {
+    $('#nickname').animate({
+      fontSize: '+=' + fontSize
+    }, 2000, function() {
+      $(this).animate({
+        fontSize: '-=' + fontSize
+      }, 2000)
+    })
+  },
   this.hideOpponentDiv = function() {
     $('#opponent').css('visibility', 'hidden');
   },

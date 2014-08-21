@@ -161,11 +161,11 @@ $(document).ready(function() {
         view.chooseAttributesDisplay(response);
       } else {
         view.winnerDisplay(response);
-        // if (response.zoom == "left") {
-        //   view.zoomWinner("#nickname");
-        // } else if (response.zoom == "right") {
-        //   view.zoomWinner("#opponent_name");
-        // }
+        if (response.zoom == "left") {
+          view.animateUserCat('1em');
+        } else if (response.zoom == "right") {
+          view.animateUserCat('-1em');
+        }
       }
       removeEventListeners();
       eventListeners();
