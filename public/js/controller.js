@@ -2,7 +2,7 @@ $(document).ready(function() {
   var view = new View; //Creates new instance of View
   view.hideOpponentDiv();
   view.animateTitle();
-  if ($('#create').trim == undefined) {
+  if ($('#create').html == "") {
     view.showUserCat();
   }
 
