@@ -1,5 +1,39 @@
 <div id="container">
   <!-- NAV -->
+  <div id="winner">
+    <p></p>
+  </div>
+
+  <nav>
+    <div id="choose_enemy">
+      <% if session[:cat_id] %>
+        <input class="button" id="choose" type="submit" value="Pick Opponent">
+      <% end %>
+    </div>
+
+
+    <div id="authentication">
+      <% if session[:id] %>
+        <input class="button" id="sign_out" type="submit" value="Sign Out">
+      <% else %>
+      <form class="form" id="sign_in" action="/sessions" method="get">
+        <h3>Sign In</h3>
+        <label class="label">Email</label><br>
+        <input type="email" name="email" value="<%= session[:email] %>"><br>
+        <label class="label">Password</label><br>
+        <input type="password" name="password">
+        <br>
+        <br>
+        <input class="button" type="submit" value="Sign In">
+      </form>
+      <% end %>
+    </div>
+  </nav>
+
+  <div>
+    <h1></h1>
+  </div>
+
   <div id="create">
     <% unless session[:id] %>
     <form class="form" id="sign_up" action="/user/new" method="post">
@@ -22,42 +56,20 @@
     <% end %>
   </div>
 
-  <div id="authentication">
-    <% if session[:id] %>
-      <input class="button" id="sign_out" type="submit" value="Sign Out">
-    <% else %>
-    <form class="form" id="sign_in" action="/sessions" method="get">
-      <h3>Sign In</h3>
-      <label class="label">Email</label><br>
-      <input type="email" name="email" value="<%= session[:email] %>"><br>
-      <label class="label">Password</label><br>
-      <input type="password" name="password">
-      <br>
-      <br>
-      <input class="button" type="submit" value="Sign In">
-    </form>
-    <% end %>
-  </div>
 <!--  -->
 
-  <h1>Cat Combat</h1>
+  <div>
+    <div class="styled_div" id="user_cat">
+      <% if session[:cat_id] %>
+        <%= erb :user_cat %>
+      <% end %>
+    </div>
 
-  <div class="styled_div" id="user_cat">
-    <% if session[:cat_id] %>
-      <%= erb :user_cat %>
-    <% end %>
+
+    <div class="styled_div" id="opponent">
+
+    </div>
   </div>
 
-  <div id="choose_enemy">
-    <% if session[:cat_id] %>
-      <input class="button" id="choose" type="submit" value="Pick Opponent">
-    <% end %>
-  </div>
-
-  <div class="styled_div" id="opponent">
-
-  </div>
-
-  <p id="winner"></p>
 
 </div>

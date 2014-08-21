@@ -1,5 +1,5 @@
 <p id="nickname"><%= Cat.find(session[:cat_id]).nickname %></p>
-<img src="<%= Cat.find(session[:cat_id]).image_src %>">
+<img id="my_cat" src="<%= Cat.find(session[:cat_id]).image_src %>">
 <div id="attritubes">
   <label>Strength:</label>
   <p id="strength"><%= Cat.find(session[:cat_id]).strength %></p>
