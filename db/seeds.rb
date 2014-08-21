@@ -19,7 +19,7 @@ images = [
 i = 0
 
 5.times do
-  User.create(fullname: Faker::Name.name, email: Faker::Internet.email, phone: Faker::PhoneNumber.cell_phone, password_hash: 1)
+  User.create(fullname: Faker::Name.name, email: Faker::Internet.email, phone: Faker::Number.number(10), password_hash: 1)
   Cat.create( nickname: Faker::Name.first_name, image_src: images[i], user_id: i+1)
   i += 1
 end
