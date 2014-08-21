@@ -1,23 +1,29 @@
 $(document).ready(function() {
   var view = new View; //Creates new instance of View
+  view.hideOpponentDiv();
+  view.animateTitle();
+
   var eventListeners = function() {
-  $('#sign_up').on('submit', createAccount);
-  $('#sign_in').on('submit', signIn);
-  $('#sign_out').on('click', signOut);
-  $('#create_cat').on('submit', createNewCat);
-  $('#cat_attributes').on('submit', chooseAttributes);
-  $('#choose').on('click', chooseOpponent);
-  $('#fight').on('click', fightOpponent);
+    $('#sign_up').on('submit', createAccount);
+    $('#sign_in').on('submit', signIn);
+    $('#sign_out').on('click', signOut);
+    $('#create_cat').on('submit', createNewCat);
+    $('#cat_attributes').on('submit', chooseAttributes);
+    $('#choose').on('click', chooseOpponent);
+    $('#fight').on('click', view.imageFightEffect);
+    $('#fight').on('click', fightOpponent);
+    view.hoverEffect();
   }
 
   var removeEventListeners = function() {
-  $('#sign_up').off();
-  $('#sign_in').off();
-  $('#sign_out').off();
-  $('#create_cat').off();
-  $('#cat_attributes').off();
-  $('#choose').off();
-  $('#fight').off();
+    $('#sign_up').off();
+    $('#sign_in').off();
+    $('#sign_out').off();
+    $('#create_cat').off();
+    $('#cat_attributes').off();
+    $('#choose').off();
+    $('#fight').off();
+    view.hoverEffectOff();
   }
 
   var signIn = function(event) {
@@ -110,7 +116,7 @@ $(document).ready(function() {
       console.log('success');
       if (response.success) {
         view.userCatDisplay(response);
-        view.displayChooseOpponentButton;
+        view.displayChooseOpponentButton();
         removeEventListeners();
         eventListeners();
       } else {
@@ -145,7 +151,17 @@ $(document).ready(function() {
       type: "PUT"
     }).done(function(response) {
       console.log('success');
-      view.winnerDisplay(response);
+      if (response.level_up) {
+        view.hideUserCat();
+        view.chooseAttributesDisplay(response);
+      } else {
+        view.winnerDisplay(response);
+        if (response.zoom == "left") {
+          view.zoomWinner("#nickname");
+        } else if (response.zoom == "right") {
+          view.zoomWinner("#opponent_name");
+        }
+      }
       removeEventListeners();
       eventListeners();
     }).fail(function() {
@@ -166,5 +182,4 @@ $(document).ready(function() {
     });
   }
   eventListeners();
-  view.hoverEffect();
 });
