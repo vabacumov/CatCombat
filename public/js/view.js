@@ -85,7 +85,7 @@ var View = function() {
   this.failedAttributesDisplay = function(data) {
     $('#create').html(data.user_cat);
     $('#attr_error').html(data.error);
-    $('#points').html("You have" + data.points + " points to spend")
+    $('#points').html("You have " + data.points + " points to spend")
   },
   this.opponentDisplay = function(data) {
     $('#opponent').css('z-index', 1);
