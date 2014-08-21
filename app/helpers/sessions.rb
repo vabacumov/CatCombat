@@ -94,11 +94,43 @@ helpers do
       enemy_move(values)
     end
 
+    def rank_cats
+      i = Cat.all.count
+      Cat.order(xp: :asc).each do |cat|
+        cat.rank = i
+        cat.save
+        i -= 1
+      end
+    end
+
+    def xp_gain(winner, loser)
+      winner.xp += (10 + loser.level * 5 + rand(1..5))
+      winner.save
+    end
+
+    def level_check(winner)
+      if winner.xp >= (20 + winner.level * 50)
+        winner.level += 1
+      end
+      winner.save
+    end
+
     def fight
       until @user_hp <= 0 || enemy_hp <= 0
         player_hit
         enemy_hit
       end
+
+      if @enemy_hp <= 0 && !(@user_hp <= 0)
+        xp_gain(@user, @enemy)
+        level_check(@user)
+      elsif @user_hp <= 0 && !(@enemy_hp <= 0)
+        xp_gain(@enemy, @user)
+        level_check(@enemy)
+      end
+
+      rank_cats
+
       return "Draw" if @user_hp <= 0 && @enemy_hp <= 0
       return user.nickname if @enemy_hp <= 0
       return enemy.nickname if @user_hp <= 0

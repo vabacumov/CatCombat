@@ -80,8 +80,9 @@ post '/cats/new' do
     session[:cat_id] = @cat.id
     content_type :json
     valid = true
+    points = 5
     choose_attributes = erb :cat_attributes, :layout => false
-    {html: choose_attributes, success: valid}.to_json
+    {html: choose_attributes, success: valid, points: points}.to_json
   else
     content_type :json
     nickname_error = @cat.errors.messages[:nickname]
@@ -93,14 +94,14 @@ end
 
 put '/cats/new/attributes' do
   @cat = Cat.find(session[:cat_id])
-  if (params[:strength].to_i + params[:agility].to_i + params[:intelligence].to_i + params[:cuteness].to_i) == 5
+  if (params[:strength].to_i + params[:agility].to_i + params[:intelligence].to_i + params[:cuteness].to_i) == (5 + @cat.level * 2)
     @cat.update(strength: @cat.strength+params[:strength].to_i, agility: @cat.agility+params[:agility].to_i, intelligence: @cat.intelligence+params[:intelligence].to_i, cuteness: @cat.cuteness+params[:cuteness].to_i)
     content_type :json
     valid = true
-    strength = params[:strength]
-    agility = params[:agility]
-    intelligence = params[:intelligence]
-    cuteness = params[:cuteness]
+    strength = @cat.strength
+    agility = @cat.agility
+    intelligence = @cat.intelligence
+    cuteness = @cat.cuteness
     xp = @cat.xp
     level = @cat.level
     rank = @cat.rank || "-"
@@ -144,14 +145,19 @@ end
 
 put '/fight' do
   user_cat = Cat.find(session[:cat_id])
+  level_before = user_cat.level
+  level_up = false
   enemy_cat = Cat.find(session[:enemy_id])
   combat = Combat.new(user_cat, enemy_cat)
   winner = combat.fight
   send_challenge_message(user_cat.user.phone)
-
   case winner
   when user_cat.nickname
     zoom = "left"
+    if user_cat.level > level_before
+      level_up = true
+      points = 5 + user_cat.level
+    end
     send_result_message(user_cat.user.phone, "Your cat won!")
   when enemy_cat.nickname
     zoom = "right"
@@ -159,8 +165,16 @@ put '/fight' do
   when "Draw"
     send_result_message(user_cat.user.phone, "Your cat drew even.")
   end
-
+  upgrades_view = erb :cat_attributes, layout: false
   content_type :json
-  {winner: winner, zoom: zoom}.to_json
+  { winner: winner,
+    zoom: zoom,
+    level_up: level_up,
+    xp: user_cat.xp,
+    rank: user_cat.rank ,
+    level: user_cat.level,
+    points: points,
+    html: upgrades_view
+  }.to_json
 end
 
