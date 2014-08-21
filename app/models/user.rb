@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
 
   validates :fullname, :email, :password_hash, presence: true
   validates :email, uniqueness: true
-  validates :phone, length: { is: 9 }, numericality: { only_integer: true }
+  validates :phone, length: { is: 10 }, numericality: { only_integer: true }
 
   def password
     @password ||= Password.new(password_hash)
