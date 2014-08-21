@@ -2,7 +2,7 @@ $(document).ready(function() {
   var view = new View; //Creates new instance of View
   view.hideOpponentDiv();
   view.animateTitle();
-  if ($('#create').html == "") {
+  if ($('#create').children().length == 0) {
     view.showUserCat();
   }
 
@@ -120,6 +120,7 @@ $(document).ready(function() {
       if (response.success) {
         view.userCatDisplay(response);
         view.displayChooseOpponentButton();
+        view.showUserCat();
         removeEventListeners();
         eventListeners();
       } else {
@@ -156,6 +157,7 @@ $(document).ready(function() {
       console.log('success');
       if (response.level_up) {
         view.hideUserCat();
+        view.hideOpponentDiv();
         view.chooseAttributesDisplay(response);
       } else {
         view.winnerDisplay(response);
