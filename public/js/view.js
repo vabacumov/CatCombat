@@ -8,14 +8,13 @@ var View = function() {
         if(current < contentArray.length) {
           elem.text(elem.text() + contentArray[current++]);
         }
-      }, 200);
+      }, 250);
     };
   })(jQuery),
 
   this.animateTitle = function() {
     $('h1').writeText("Cat Combat");
     $('h1').animate({
-      backgroundColor: "green",
       fontSize: "4em",
       marginLeft: "auto",
       letterSpacing: "0.2em",
