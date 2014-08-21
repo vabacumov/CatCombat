@@ -99,7 +99,7 @@ helpers do
         player_hit
         enemy_hit
       end
-      return "draw" if @user_hp <= 0 && @enemy_hp <= 0
+      return "Draw" if @user_hp <= 0 && @enemy_hp <= 0
       return user.nickname if @enemy_hp <= 0
       return enemy.nickname if @user_hp <= 0
     end
