@@ -2,6 +2,9 @@ $(document).ready(function() {
   var view = new View; //Creates new instance of View
   view.hideOpponentDiv();
   view.animateTitle();
+  if ($('#create').trim == undefined) {
+    view.showUserCat();
+  }
 
   var eventListeners = function() {
     $('#sign_up').on('submit', createAccount);
@@ -156,11 +159,11 @@ $(document).ready(function() {
         view.chooseAttributesDisplay(response);
       } else {
         view.winnerDisplay(response);
-        if (response.zoom == "left") {
-          view.zoomWinner("#nickname");
-        } else if (response.zoom == "right") {
-          view.zoomWinner("#opponent_name");
-        }
+        // if (response.zoom == "left") {
+        //   view.zoomWinner("#nickname");
+        // } else if (response.zoom == "right") {
+        //   view.zoomWinner("#opponent_name");
+        // }
       }
       removeEventListeners();
       eventListeners();

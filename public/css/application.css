@@ -57,6 +57,7 @@ form {
   float: right;
 }
 .styled_div {
+  visibility: hidden;
   z-index: 10;
   display: inline-block;
   background-color: #d7d76a;

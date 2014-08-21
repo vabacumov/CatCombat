@@ -65,7 +65,7 @@ var View = function() {
   },
   this.chooseAttributesDisplay = function(data) {
     $('#create').html(data.html);
-    $('#points').html("You have" + data.points + " to spend")
+    $('#points').html("You have " + data.points + " points to spend")
   },
   this.failedNewCatDisplay = function(data) {
     $('#nickname_error').html(data.error);
@@ -86,6 +86,7 @@ var View = function() {
   this.failedAttributesDisplay = function(data) {
     $('#create').html(data.user_cat);
     $('#attr_error').html(data.error);
+    $('#points').html("You have" + data.points + " to spend")
   },
   this.opponentDisplay = function(data) {
     $('#opponent').css('z-index', 1);
@@ -104,11 +105,11 @@ var View = function() {
     $('#level').html(data.level);
     $('#rank').html(data.rank);
     $('#winner').find('p').html(data.winner);
-    $('#winner').find('p').css();
-    $('#winner').animate({
-      backgroundColor: "red",
-      fontSize: "2em" }, 1000
-      );
+    // $('#winner').find('p').css();
+    // $('#winner').animate({
+    //   backgroundColor: "red",
+    //   fontSize: "2em" }, 1000
+    //   );
     this.hideOpponentDiv();
   },
   this.hoverEffect = function() {
@@ -136,12 +137,12 @@ var View = function() {
         right: "-=27%"
       }, 2000)
     });
-    $('winner').animate({
-      backgroundColor: 'red'
-    }, 3000, function() {
-      $(this).css('background-color', '')
-    }
-    );
+    // $('winner').animate({
+    //   backgroundColor: 'red'
+    // }, 3000, function() {
+    //   $(this).css('background-color', '')
+    // }
+    // );
     $('body > *').not('.styled_div').animate({
       opacity: 0.4
     }, 5000, function() {
@@ -150,9 +151,9 @@ var View = function() {
       })
     })
   },
-  this.zoomWinner = function(winner) {
-    $(winner).css('color', 'red');
-  },
+  // this.zoomWinner = function(winner) {
+  //   $(winner).css('color', 'red');
+  // },
   this.hideOpponentDiv = function() {
     $('#opponent').css('visibility', 'hidden');
   },

@@ -94,7 +94,7 @@ end
 
 put '/cats/new/attributes' do
   @cat = Cat.find(session[:cat_id])
-  if (params[:strength].to_i + params[:agility].to_i + params[:intelligence].to_i + params[:cuteness].to_i) == (5 + @cat.level * 2)
+  if (params[:strength].to_i + params[:agility].to_i + params[:intelligence].to_i + params[:cuteness].to_i) == (5 + @cat.level)
     @cat.update(strength: @cat.strength+params[:strength].to_i, agility: @cat.agility+params[:agility].to_i, intelligence: @cat.intelligence+params[:intelligence].to_i, cuteness: @cat.cuteness+params[:cuteness].to_i)
     content_type :json
     valid = true
@@ -120,8 +120,9 @@ put '/cats/new/attributes' do
   else
     content_type :json
     error = "Retry"
+    points = 5 + @cat.level
     choose_attributes = erb :cat_attributes, :layout => false
-    {user_cat: choose_attributes, error: error}.to_json
+    {user_cat: choose_attributes, error: error, points: points}.to_json
   end
 end
 
@@ -163,6 +164,7 @@ put '/fight' do
     zoom = "right"
     send_result_message(user_cat.user.phone, "Your cat lost...")
   when "Draw"
+    zoom = nil
     send_result_message(user_cat.user.phone, "Your cat drew even.")
   end
   upgrades_view = erb :cat_attributes, layout: false
