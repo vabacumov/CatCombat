@@ -1,3 +1,21 @@
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+#authentication {
+  float: right;
+  margin: 0.5% 0.5% 0 0;
+}
+#choose_enemy {
+  float: left;
+  margin: 0.5% 0 0 0.5%;
+}
+#create {
+  position: fixed;
+  top: 0px;
+  float: left;
+}
 form {
   padding: 10px;
   background-color: #2B4000;
@@ -12,31 +30,40 @@ form {
   font-weight: inherit;
 }
 #winner {
+  position: fixed;
+  left: 46%;
+  right: 46%;
   color: white;
+}
+#winner p {
+  font-size: 2em;
+  color: red;
 }
 #fight_button{
   position: absolute;
   right: 0px;
   top: 400px;
 }
-#image {
-  width: 200px;
+#enemy_cat {
+  width: 100%;
   height: auto;
 }
+#user_cat {
+  position: relative;
+  float: left;
+}
 #opponent {
-  position: absolute;
-  right: 0px;
-  top: 430px;
-  text-align: center;
-  background-color: white;
+  position: relative;
+  float: right;
 }
 .styled_div {
+  z-index: 10;
   display: inline-block;
   background-color: #d7d76a;
   border: 30px #96b95b ridge;
-
   padding: 30px;
-
+  text-align: center;
+  width: 15%;
   color: #678532;
   font-size: inherit;
   font-weight: inherit;
@@ -45,33 +72,26 @@ form {
   text-decoration: inherit;
 }
 #user_cat img {
-  width: 75%;
+  width: 100%;
 }
 #container {
   position: absolute;
   background-image: url("http://hdwallimg.com/wp-content/uploads/2014/07/Red-Cat-Vs-Black-Cat-Fight-Wallpaper-Photo.jpg");
-  width: 1900px;
+  width: 100%;
   height: 1200px;
   top: 0px;
 }
-#create {
-  position: relative;
-  float: left;
-}
-#authentication {
-  position: relative;
-  float: right;
-  display: inline-block;
-  right: 0px;
-  top: 0px;
-}
 h1 {
+  position: relative;
+  display: inline-block;
+  top: 1em;
   color: #FFCC00;
   font-family: Verdana;
   font-size: 3em;
-  margin-right: auto;
-  margin-left: auto;
-  width: 20%;
+  right: 37.5%;
+  left: 37.5%;
+  margin-bottom: 1.5em;
+  text-shadow: 2px 2px 2px #999;
 }
 h3 {
   color: white;
