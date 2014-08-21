@@ -151,14 +151,16 @@ put '/fight' do
 
   case winner
   when user_cat.nickname
+    zoom = "left"
     send_result_message(user_cat.user.phone, "Your cat won!")
   when enemy_cat.nickname
+    zoom = "right"
     send_result_message(user_cat.user.phone, "Your cat lost...")
-  when "draw"
+  when "Draw"
     send_result_message(user_cat.user.phone, "Your cat drew even.")
   end
 
   content_type :json
-  {winner: winner}.to_json
+  {winner: winner, zoom: zoom}.to_json
 end
 
